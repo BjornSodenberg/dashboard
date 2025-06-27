@@ -6,6 +6,7 @@ const Dashboard = () => {
     const [receivedTotal, setReceivedTotal] = useState(0);
     const [spentTotal, setSpentTotal] = useState(0);
     const [investors, setInvestors] = useState([]);
+    const [dateString, setDateString] = useState('');
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,6 +15,7 @@ const Dashboard = () => {
             let totalReceived = 0;
             let totalSpent = 0;
             const allInvestments = [];
+            let dateString = "";
 
             docs.forEach((doc) => {
                 totalReceived += doc.received || 0;
@@ -23,6 +25,7 @@ const Dashboard = () => {
                         allInvestments[index] = (allInvestments[index] || 0) + amount;
                     });
                 }
+                dateString = doc.dateTime;
             });
 
             const investorList = allInvestments.map((sum, i) => ({
@@ -34,29 +37,27 @@ const Dashboard = () => {
             setReceivedTotal(totalReceived);
             setSpentTotal(totalSpent);
             setInvestors(investorList);
+            setDateString(dateString);
         };
 
         fetchData();
     }, []);
 
     return (
-        <div className="max-w-4xl mx-auto p-6 space-y-8">
-            {/* Получено */}
-            <section className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-2">Получено</h2>
-                <p className="text-3xl text-green-600">{receivedTotal} ₽</p>
-            </section>
+        <div className="flex flex-row">
+            <div className="flex flex-col flex-1 h-screen justify-center">
+                <section className="flex-1 flex border-b-1 border-gray-300 px-10 flex-col justify-center gap-5">
+                    <p className="text-9xl text-red-600">{spentTotal} ₽</p>
+                    <p className="text-neutral-500">На {dateString}</p>
+                </section>
 
-            {/* Потрачено */}
-            <section className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-2">Потрачено</h2>
-                <p className="text-3xl text-red-600">{spentTotal} ₽</p>
-            </section>
-
-            {/* Инвесторы */}
-            <section className="bg-white shadow rounded-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">Инвесторы</h2>
-                <ul className="space-y-2">
+                <section className="flex-1 flex mx-10 flex-col justify-center gap-5">
+                    <p className="text-9xl text-green-600">{receivedTotal} ₽</p>
+                    <p className="text-neutral-500">На {dateString}</p>
+                </section>
+            </div>
+            <section className="flex w-sm   border-l-1 border-gray-300">
+                <ul className="space-y-2 p-10">
                     {investors.length === 0 && <li>Нет данных об инвесторах.</li>}
                     {investors.map((investor) => (
                         <li key={investor.id} className="flex justify-between">

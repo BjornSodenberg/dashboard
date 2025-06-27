@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "your-project-id",
-    storageBucket: "your-project.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCozLpoZ06Wi4MGbHgNVzeEZHGI3K5znQ8",
+    authDomain: "dashboard-78440.firebaseapp.com",
+    projectId: "dashboard-78440",
+    storageBucket: "dashboard-78440.firebasestorage.app",
+    messagingSenderId: "605040740231",
+    appId: "1:605040740231:web:d30a1f264ab05b83803522"
 };
 
 const app = initializeApp(firebaseConfig);
