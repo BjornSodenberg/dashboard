@@ -40,11 +40,6 @@ const Dashboard = () => {
             setDateString(dateString);
         };
 
-        const getBilling = async () => {
-            const response = await fetch('/v1/cloud_billing/statistic/projects')
-            ixO5JMyMoGFcShrSZlGcS2I60_306509
-        }
-
         fetchData();
     }, []);
 
@@ -52,17 +47,17 @@ const Dashboard = () => {
         <div className="flex flex-row">
             <div className="flex flex-col flex-1 h-screen justify-center">
                 <section className="flex-1 flex border-b-1 border-gray-300 px-10 flex-col justify-center gap-5">
-                    <p className="text-9xl text-red-600">{spentTotal} ₽</p>
+                    <p className="text-9xl " style={{color: "#F05451"}}>{spentTotal} ₽</p>
                     <p className="text-neutral-500">На {dateString}</p>
                 </section>
 
                 <section className="flex-1 flex mx-10 flex-col justify-center gap-5">
-                    <p className="text-9xl text-green-600">{receivedTotal} ₽</p>
+                    <p className="text-9xl " style={{color: "#4C9F70"}}>{receivedTotal} ₽</p>
                     <p className="text-neutral-500">На {dateString}</p>
                 </section>
             </div>
             <section className="flex w-sm   border-l-1 border-gray-300">
-                <ul className="space-y-2 p-10">
+                <ul className="space-y-2 p-10 flex-1">
                     {investors.length === 0 && <li>Нет данных об инвесторах.</li>}
                     {investors.map((investor) => (
                         <li key={investor.id} className="flex justify-between">
