@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+
+.my-custom-font {
+    font-family: sans-serif;
+}

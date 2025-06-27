@@ -40,6 +40,11 @@ const Dashboard = () => {
             setDateString(dateString);
         };
 
+        const getBilling = async () => {
+            const response = await fetch('/v1/cloud_billing/statistic/projects')
+            ixO5JMyMoGFcShrSZlGcS2I60_306509
+        }
+
         fetchData();
     }, []);
 
