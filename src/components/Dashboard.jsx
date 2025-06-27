@@ -1,12 +1,13 @@
 // src/components/Dashboard.jsx
-import React, { useEffect, useState } from "react";
-import { getDataFromFirestore } from "../Firebase";
+import React, {useEffect, useState} from "react";
+import {getDataFromFirestore} from "../Firebase";
 
 const Dashboard = () => {
     const [receivedTotal, setReceivedTotal] = useState(0);
     const [spentTotal, setSpentTotal] = useState(0);
     const [investors, setInvestors] = useState([]);
     const [dateString, setDateString] = useState('');
+    const [totalInvestors, setTotalInvestors] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,6 +39,7 @@ const Dashboard = () => {
             setSpentTotal(totalSpent);
             setInvestors(investorList);
             setDateString(dateString);
+            setTotalInvestors(investorList.reduce((sum, amount) => sum + amount.sum, 0))
         };
 
         fetchData();
@@ -58,13 +60,21 @@ const Dashboard = () => {
             </div>
             <section className="flex w-sm   border-l-1 border-gray-300">
                 <ul className="space-y-2 p-10 flex-1">
-                    {investors.length === 0 && <li>Нет данных об инвесторах.</li>}
+                    {investors.length === 0 && <li>Нет данных.</li>}
                     {investors.map((investor) => (
                         <li key={investor.id} className="flex justify-between">
                             <span>{investor.name}</span>
                             <span className="font-medium">{investor.sum} ₽</span>
                         </li>
                     ))}
+                    {
+                        investors.length > 0 && totalInvestors && (
+                            <li className="flex justify-between">
+                                <span>Итого</span>
+                                <span className="font-medium">{totalInvestors} ₽</span>
+                            </li>
+                        )
+                    }
                 </ul>
             </section>
         </div>
